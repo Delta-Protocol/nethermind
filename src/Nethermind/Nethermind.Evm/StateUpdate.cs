@@ -22,7 +22,7 @@ using Nethermind.Dirichlet.Numerics;
 
 namespace Nethermind.Evm
 {
-    public struct StateUpdate
+    public class StateUpdate
     {
         public long Number { get; set; }
         public long GasLimit { get; set; }

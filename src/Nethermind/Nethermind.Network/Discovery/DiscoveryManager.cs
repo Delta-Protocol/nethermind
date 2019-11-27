@@ -182,13 +182,16 @@ namespace Nethermind.Network.Discovery
             {
                 if (_logger.IsWarn)
                 {
-                    _logger.Warn($"Received ping message with empty address, message: {message}");
+                    _logger.Warn($"Received a ping message with empty address, message: {message}");
                 }
             }
 
             if (!Bytes.AreEqual(_nodeTable.MasterNode.Address.Address.GetAddressBytes(), message.DestinationAddress?.Address.GetAddressBytes()))
             {
-                throw new NetworkingException($"Received message with incorrect destination address, message: {message}", NetworkExceptionType.Discovery);
+                if (_logger.IsWarn)
+                {
+                    _logger.Warn($"Received a message with incorrect destination address, message: {message}");
+                }
             }
 
             // port will be different as we dynamically open ports for each socket connection
@@ -207,7 +210,7 @@ namespace Nethermind.Network.Discovery
             {
                 if (_logger.IsTrace)
                 {
-                    _logger.Warn($"Received message with incorect source port, message: {message}");
+                    _logger.Warn($"Received a message with incorect source port, message: {message}");
                 }
             }
         }
